@@ -4,6 +4,9 @@ body {
 .shoptext {
 	color: #fff;
 }
+.navtext {
+	padding-left: 20px;
+}
 .shoptextcontainer {
 	background-color: #292e3f;
 }

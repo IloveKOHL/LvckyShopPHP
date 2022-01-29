@@ -11,7 +11,7 @@
 <body>
     <div class="w3-row shoptextcontainer">
         <div class="w3-col" style="width:20%">
-            <h2 class="shoptext">LvckyShop</h2>
+            <h2 class="shoptext navtext">LvckyShop</h2>
         </div>
     </div>
     <?php
