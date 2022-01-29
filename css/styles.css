@@ -3,8 +3,17 @@ body {
 }
 .shoptext {
 	color: #fff;
-	margin-left: 10%;
 }
 .shoptextcontainer {
 	background-color: #292e3f;
+}
+.productbutton {
+	background-color: #292e3f;
+	color: #fff;
+	border-radius: 10px;
+}
+
+.productbutton:hover {
+	background-color: #fff;
+	color: black;
 }
