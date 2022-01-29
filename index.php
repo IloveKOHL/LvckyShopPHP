@@ -36,7 +36,7 @@
                     $description = $row["description"];
                     $price = $row["price"];
                     $imageURL = $row["imageURL"];
-                    echo "<div class=\"w3-card-4 w3-margin\">";
+                    echo "<div class=\"w3-card-4 w3-margin productdivinner\">";
                     echo "<img src=\"" . $imageURL . "\" alt=\"Nature\" style=\"width:100%\">";
                     echo "<div class=\"w3-container\">";
                     echo "<h3 class=\"shoptext\">$productname</h3>";
@@ -56,7 +56,9 @@
                     $description = $row["description"];
                     $price = $row["price"];
                     $imageURL = $row["imageURL"];
-                    echo "<div class=\"w3-col s4\">";
+                    
+                    echo "<div class=\"w3-col s4 productdiv\">";
+                    echo "<div class=\"w3-card-4 w3-margin productdivinner\">";
                     echo "<img src=\"" . $imageURL . "\" alt=\"Nature\" style=\"width:100%\">";
                     echo "<div class=\"w3-container\">";
                     echo "<h3 class=\"shoptext\">$productname</h3>";
@@ -65,6 +67,7 @@
                     echo "<p>";
                     echo "<button class=\"w3-button w3-block productbutton\" value=" . $id . ">Buy</button>";
                     echo "</p>";
+                    echo "</div>";
                     echo "</div>";
                     echo "</div>";
                 
