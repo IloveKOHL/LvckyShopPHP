@@ -29,6 +29,40 @@ body {
 	border-radius: 7px;
 }
 
+.login h2 {
+	text-align: center;
+}
+
+.login {
+	background-color: #292e3f;
+	border-radius: 10px;
+}
+.login:hover {
+	background-color: #1a1d28;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.center {
+	margin: auto;
+	width: 50%;
+	border: 3px solid #1a1d28;
+	padding: 10px;
+	text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+	.center {
+		width: 100%;
+	}
+}
+
+.logincontainer {
+	background-color: #292e3f;
+	border-radius: 10px;
+	color: #fff;
+}
+
 /* width */
 ::-webkit-scrollbar {
 	width: 10px;

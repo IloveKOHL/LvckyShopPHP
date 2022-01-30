@@ -1,3 +1,8 @@
+<?php
+
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,15 +12,20 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/styles.css">
     <title>Lvcky Shop</title>
-    <!--- 
-    Start Server YEET
-    phpserver/php.exe -S localhost:80 
+    <!---
+
+        Start Server YEET
+        phpserver/php.exe -S 192.168.178.20:80
+
     -->
 </head>
 <body>
     <div class="w3-row shoptextcontainer">
-        <div class="w3-col" style="width:20%">
+        <div class="w3-col" style="width:90%">
             <h2 class="shoptext navtext">LvckyShop</h2>
+        </div>
+        <div class="w3-rest w3-hide-medium w3-hide-small login" onclick="location.href='login/';">
+            <h2 class="shoptext"><a>Login</a></h2>
         </div>
     </div>
     <?php
@@ -23,6 +33,11 @@
         // UND include Path
         include("mysql/mysql.php");
         $currency = "€";
+
+        echo "<br>";
+        echo "Session Username: " . $_SESSION['username'] . "<br>";
+        echo "Session Password: " . $_SESSION['password'] . "<br>";
+        
     ?>
 
     <div class="w3-row-padding w3-section w3-stretch">
