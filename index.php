@@ -27,7 +27,7 @@ session_start();
 </head>
 <body>
     <div class="w3-row shoptextcontainer">
-        <div class="w3-col" style="width:90%">
+        <div class="w3-half">
             <h2 class="shoptext navtext">LvckyShop</h2>
         </div>
 
@@ -42,11 +42,23 @@ session_start();
         } else {
             if (isLoginValid($_SESSION['username'], $_SESSION['password'])) {
                 $permissionLevel = getUserPermissionLevelByID(getIDbyHashedPassword($_SESSION['password']));
-                echo '
-                <div class="w3-rest w3-hide-medium w3-hide-small login" id="logindiv" onclick="location.href=\'logout/\';">
-                    <h2 class="shoptext" id="logindivtext" style="color:red;"><a>Logout</a></h2>
-                </div>
-                ';
+                if ($permissionLevel == 5) {
+                    echo '
+                    
+                    <div class="w3-quarter w3-hide-medium w3-hide-small login" id="logindiv" onclick="location.href=\'admin/\';">
+                        <h2 class="shoptext"><a>Admin</a></h2>
+                    </div>
+                    <div class="w3-quarter w3-hide-medium w3-hide-small login" id="logindiv" onclick="location.href=\'logout/\';">
+                        <h2 class="shoptext" style="color:red;"><a>Logout</a></h2>
+                    </div>
+                    ';
+                } else {
+                    echo '
+                    <div class="w3-quarter w3-hide-medium w3-hide-small login" id="logindiv" onclick="location.href=\'logout/\';">
+                        <h2 class="shoptext" style="color:red;"><a>Logout</a></h2>
+                    </div>
+                    ';
+                }
             } else {
                 // Login is not valid
                 session_destroy();
