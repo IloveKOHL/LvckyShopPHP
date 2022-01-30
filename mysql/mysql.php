@@ -21,7 +21,6 @@ if ($conn->connect_error) {
     )";
 
     if ($conn->query($sql) === TRUE) {
-    echo "<script>console.log('MySQL table created')</script>";
     } else {
     echo "Error creating table: " . $conn->error;
     }
@@ -37,7 +36,7 @@ if ($conn->connect_error) {
     )";
     
     if ($conn->query($sql) === TRUE) {
-      echo "<script>console.log('MySQL table created')</script>";
+
     } else {
       echo "Error creating table: " . $conn->error;
     }
