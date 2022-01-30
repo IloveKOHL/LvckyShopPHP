@@ -15,7 +15,7 @@ if ($conn->connect_error) {
     $sql = "CREATE TABLE IF NOT EXISTS accounts (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nickname VARCHAR(30) NOT NULL,
-    password VARCHAR(30) NOT NULL,
+    password VARCHAR(250) NOT NULL,
     permissionlevel INT(6) NOT NULL,
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )";
@@ -139,6 +139,53 @@ function getUserPermissionLevelByID($id) {
         }
       } else {
         echo "0 results";
+      }
+    $conn->close();
+
+}
+
+function getIDbyHashedPassword($hashedPassword) {
+    global $servername, $username, $dbname, $password;
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT `id` FROM `accounts` WHERE `password`='$hashedPassword';";
+
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        
+        while($row = $result->fetch_assoc()) {
+            return $row['id'];
+        }
+      } else {
+        return 0;
+      }
+    $conn->close();
+}
+
+function isLoginValid($loginusername, $loginpassword) {
+    global $servername, $username, $dbname, $password;
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT * FROM `accounts` WHERE `nickname`='$loginusername' AND `password`='$loginpassword';";
+
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        
+        while($row = $result->fetch_assoc()) {
+            if (!empty($row["id"])) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+      } else {
+        return 0;
       }
     $conn->close();
 

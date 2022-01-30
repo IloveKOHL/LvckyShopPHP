@@ -20,35 +20,65 @@ session_start();
 </head>
 <body>
     <?php
+    include ("../mysql/mysql.php");
     if (empty($_POST['username']) || empty($_POST['password'])) {
         // NOT TRYING TO LOGIN
         // LOGGED OUT
         session_destroy();
+
+        echo '
+        <div class="center">
+            <div class="w3-container logincontainer">
+                <h1>Login</h1>
+                <h2>Username</h2>
+
+                <form action="./index.php" method="post">
+                <input type="text" name="username" id="username" class="w3-input">
+
+                <h2>Password</h2>
+                <input type="password" name="password" id="password" class="w3-input">
+                <br>
+                <input type="submit" value="Einloggen">
+                </form>
+                <br>
+            </div>
+        </div>
+        ';
     } else {
         echo "<br>";
-        $username = $_POST['username'];
-        $password = $_POST['password'];
 
-        $_SESSION['username'] = $username;
-        $_SESSION['password'] = hash("sha256", $password);
+        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['password'] = hash("sha256", $_POST['password']);
 
-        header("Location: ../");
+        $loginusername = $_SESSION['username'];
+        $loginpassword = $_SESSION['password'];
+
+
+        if (isLoginValid($loginusername, $loginpassword)) {
+            // Login is valid
+            header("Location: ../");
+        } else {
+            echo '
+            <div class="center">
+                <div class="w3-container logincontainer">
+                    <h1 style="color: red;">Login fehlgeschlagen!</h1>
+                    <h3 style="color: red;">Falscher Nutzername oder Passwort</h3>
+                    <h2>Username</h2>
+    
+                    <form action="./index.php" method="post">
+                    <input type="text" name="username" id="username" class="w3-input">
+    
+                    <h2>Password</h2>
+                    <input type="password" name="password" id="password" class="w3-input">
+                    <br>
+                    <input type="submit" value="Einloggen">
+                    </form>
+                    <br>
+                </div>
+            </div>
+            ';
+        }
     }
     ?>
-    <div class="center">
-        <div class="w3-container logincontainer">
-            <h1>Login</h1>
-            <h2>Username</h2>
-
-            <form action="./index.php" method="post">
-            <input type="text" name="username" id="username" class="w3-input">
-
-            <h2>Password</h2>
-            <input type="password" name="password" id="password" class="w3-input">
-            <br>
-            <input type="submit" value="Einloggen">
-            </form>
-            <br>
-        </div>
-    </div>
+    
 </body>

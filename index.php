@@ -3,6 +3,12 @@
 // Start the session
 session_start();
 ?>
+<?php
+    // Vorerst Config abschnitt in PHP
+    // UND include Path
+    include("mysql/mysql.php");
+    $currency = "€";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,23 +30,36 @@ session_start();
         <div class="w3-col" style="width:90%">
             <h2 class="shoptext navtext">LvckyShop</h2>
         </div>
-        <div class="w3-rest w3-hide-medium w3-hide-small login" onclick="location.href='login/';">
-            <h2 class="shoptext"><a>Login</a></h2>
-        </div>
-    </div>
-    <?php
-        // Vorerst Config abschnitt in PHP
-        // UND include Path
-        include("mysql/mysql.php");
-        $currency = "€";
 
-        echo "<br>" . getUserPermissionLevelByID(1);
-        if (empty($_SESSION['username']) || empty($_SESSION['password'])) {
+        <?php
+         if (empty($_SESSION['username']) || empty($_SESSION['password'])) {
             // NOT LOGGED IN
+            echo '
+            <div class="w3-rest w3-hide-medium w3-hide-small login" id="logindiv" onclick="location.href=\'login/\';">
+                <h2 class="shoptext" id="logindivtext"><a>Login</a></h2>
+            </div>
+            ';
         } else {
-
+            if (isLoginValid($_SESSION['username'], $_SESSION['password'])) {
+                $permissionLevel = getUserPermissionLevelByID(getIDbyHashedPassword($_SESSION['password']));
+                echo '
+                <div class="w3-rest w3-hide-medium w3-hide-small login" id="logindiv" onclick="location.href=\'logout/\';">
+                    <h2 class="shoptext" id="logindivtext" style="color:red;"><a>Logout</a></h2>
+                </div>
+                ';
+            } else {
+                // Login is not valid
+                session_destroy();
+                echo '
+                <div class="w3-rest w3-hide-medium w3-hide-small login" id="logindiv" onclick="location.href=\'login/\';">
+                    <h2 class="shoptext" id="logindivtext"><a>Login</a></h2>
+                </div>
+                ';
+            }
         }
-    ?>
+        ?>
+    </div>
+
 
     <div class="w3-row-padding w3-section w3-stretch">
     <?php
