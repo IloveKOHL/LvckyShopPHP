@@ -89,7 +89,7 @@ session_start();
                     $price = $row["price"];
                     $imageURL = $row["imageURL"];
                     echo "<div class=\"w3-card-4 w3-margin productdivinner\">";
-                    echo "<img src=\"" . $imageURL . "\" alt=\"Nature\" style=\"width:100%\">";
+                    echo "<img src=\"" . $imageURL . "\" alt=\"Nature\" class=\"productimg\">";
                     echo "<div class=\"w3-container\">";
                     echo "<h3 class=\"shoptext\">$productname</h3>";
                     echo "<p class=\"shoptext\">$description</p>";

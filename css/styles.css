@@ -23,6 +23,7 @@ body {
 .productdivinner {
 	background-color: #292e3f;
 	border-radius: 7px;
+	flex: 1; /* additionally, equal width */
 }
 
 .productdivinner img {
@@ -54,6 +55,11 @@ body {
 @media screen and (max-width: 600px) {
 	.center {
 		width: 100%;
+	}
+	.productdivinner {
+		background-color: #292e3f;
+		border-radius: 7px;
+		flex: none; /* additionally, equal width */
 	}
 }
 
