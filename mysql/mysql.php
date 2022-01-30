@@ -11,19 +11,20 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// sql to create table
-$sql = "CREATE TABLE IF NOT EXISTS accounts (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-nickname VARCHAR(30) NOT NULL,
-password VARCHAR(30) NOT NULL,
-reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)";
+    // sql to create table
+    $sql = "CREATE TABLE IF NOT EXISTS accounts (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nickname VARCHAR(30) NOT NULL,
+    password VARCHAR(30) NOT NULL,
+    permissionlevel INT(6) NOT NULL,
+    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
 
-if ($conn->query($sql) === TRUE) {
-  echo "<script>console.log('MySQL table created')</script>";
-} else {
-  echo "Error creating table: " . $conn->error;
-}
+    if ($conn->query($sql) === TRUE) {
+    echo "<script>console.log('MySQL table created')</script>";
+    } else {
+    echo "Error creating table: " . $conn->error;
+    }
 
 
     $sql = "CREATE TABLE IF NOT EXISTS products (
@@ -114,6 +115,31 @@ function getProductList() {
 
     $result = $conn->query($sql);
     return $result;
+    $conn->close();
+
+}
+
+function getUserPermissionLevelByID($id) {
+    global $servername, $username, $dbname, $password;
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT `id`, `permissionlevel` FROM `accounts` WHERE  `id`=$id;";
+
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        
+        while($row = $result->fetch_assoc()) {
+            if ($row["id"] == $id) {
+                return $row['permissionlevel'];
+            }
+        }
+      } else {
+        echo "0 results";
+      }
     $conn->close();
 
 }

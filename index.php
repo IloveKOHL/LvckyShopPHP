@@ -34,10 +34,12 @@ session_start();
         include("mysql/mysql.php");
         $currency = "€";
 
-        echo "<br>";
-        echo "Session Username: " . $_SESSION['username'] . "<br>";
-        echo "Session Password: " . $_SESSION['password'] . "<br>";
-        
+        echo "<br>" . getUserPermissionLevelByID(1);
+        if (empty($_SESSION['username']) || empty($_SESSION['password'])) {
+            // NOT LOGGED IN
+        } else {
+
+        }
     ?>
 
     <div class="w3-row-padding w3-section w3-stretch">
