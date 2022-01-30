@@ -1,6 +1,7 @@
 <?php
 
 // Start the session
+session_name('lwshop');
 session_start();
 ?>
 <?php
